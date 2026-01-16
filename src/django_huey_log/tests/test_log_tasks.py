@@ -11,6 +11,4 @@ def test_task_logging_success():
     # Check if an attempt was logged
     attempt = HueyTaskAttempt.objects.first()
     assert attempt is not None
-    assert attempt.task_name == "example.tasks.success_task"
-    # Note: In synchronous testing, you might need to manually trigger signals
-    # depending on your HUEY configuration in tests.
+    assert attempt.task_name == "success_task"

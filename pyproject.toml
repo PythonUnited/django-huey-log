@@ -18,3 +18,13 @@ packages = ["src/django_huey_log"]
 
 [tool.hatch.build.targets.wheel.sources]
 "src" = "django_huey_log"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0",
+    "pytest-django>=4.5",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "example.settings"
+python_files = ["tests.py", "test_*.py"]

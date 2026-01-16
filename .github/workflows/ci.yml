@@ -29,8 +29,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv pip install "django==${{ matrix.django-version }}"
-          uv pip install -e ".[test]" || uv pip install -e . pytest pytest-django huey
+          uv pip install --system "django==${{ matrix.django-version }}"
+          uv pip install --system -e ".[test]" || uv pip install -e . pytest pytest-django huey
 
       - name: Run Tests
         run: uv run pytest

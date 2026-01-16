@@ -32,7 +32,6 @@ def test_task_logging_failure():
     assert len(attempt.traceback) > 0
 
 
-
 @pytest.mark.django_db
 def test_task_logging_arguments():
     # Test complex argument capturing.

@@ -9,6 +9,7 @@ def success_task(name):
     time.sleep(1)
     return f"Done {name}"
 
+
 @task()
 def failure_task():
     time.sleep(0.5)

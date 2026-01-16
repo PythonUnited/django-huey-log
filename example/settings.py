@@ -54,7 +54,7 @@ DATABASES = {
 STATIC_URL = "static/"
 
 HUEY = {
-    'huey_class': 'huey.SqliteHuey',
-    'name': 'test-huey',
-    'filename': BASE_DIR / 'huey_db.sqlite3',
+    "huey_class": "huey.SqliteHuey",
+    "name": "test-huey",
+    "filename": BASE_DIR / "huey_db.sqlite3",
 }

@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,7 +54,7 @@ DATABASES = {
 STATIC_URL = "static/"
 
 HUEY = {
-    'huey_class': 'huey.SqliteHuey',
-    'name': 'test-huey',
-    'filename': BASE_DIR / 'huey_db.sqlite3',
+    "huey_class": "huey.SqliteHuey",
+    "name": "test-huey",
+    "filename": BASE_DIR / "huey_db.sqlite3",
 }

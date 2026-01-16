@@ -15,14 +15,14 @@ Log and monitor [Huey](https://huey.readthedocs.io/en/latest/) task attempts dir
 
 1. Install the package using [uv](https://docs.astral.sh/uv/):
    ```bash
-   uv add django-huey-log
+   uv add git+https://github.com/PythonUnited/django-huey-log.git
    ```
 
 2. Add `huey_log` to your `INSTALLED_APPS` in `settings.py`:
    ```python
    INSTALLED_APPS = [
        # ...
-       "huey_log",
+       "django_huey_log",
        # ...
    ]
    ```

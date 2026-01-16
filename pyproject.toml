@@ -5,7 +5,7 @@ description = "Log and monitor Huey task attempts in the Django admin"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "django>=4.2",
+    "django>=5.0",
     "huey>=2.5.0",
 ]
 
@@ -18,3 +18,32 @@ packages = ["src/django_huey_log"]
 
 [tool.hatch.build.targets.wheel.sources]
 "src" = "django_huey_log"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0",
+    "pytest-django>=4.5",
+]
+dev = [
+    "ruff==0.14.13",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "example.settings"
+python_files = ["tests.py", "test_*.py"]
+pythonpath = ["."]
+
+[tool.ruff]
+# Target version for the generated code
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+# Enable Pyflakes (F) and pycodestyle (E, W) codes by default.
+# Also common: I (isort), B (flake8-bugbear), UP (pyupgrade)
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

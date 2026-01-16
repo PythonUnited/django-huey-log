@@ -1,5 +1,7 @@
-from huey.contrib.djhuey import task, db_task
 import time
+
+from huey.contrib.djhuey import task
+
 
 @task()
 def success_task(name):

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import traceback as tb
-from datetime import datetime, timezone as dt_timezone
+from datetime import datetime
+from datetime import timezone as dt_timezone
 
 from django.utils import timezone
 from huey.contrib.djhuey import HUEY
@@ -48,7 +49,8 @@ def _task_eta(task):
 
 def _upsert_attempt(task, status: str, **fields):
     # Single-row “current attempt” strategy keyed by task_id + started_at bucket:
-    # For simplicity: just create new rows for EXECUTING, then update the latest row for completion/error.
+    # For simplicity: just create new rows for EXECUTING, then update the latest
+    # row for completion/error.
     task_id = str(getattr(task, "id", "") or getattr(task, "task_id", ""))
 
     if status == HueyTaskAttempt.Status.EXECUTING:

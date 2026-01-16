@@ -1,12 +1,14 @@
 import pytest
+
+from example.tasks import failure_task, success_task
+
 from ..models import HueyTaskAttempt
-from example.tasks import success_task, failure_task
 
 
 @pytest.mark.django_db
 def test_task_logging_success():
     # Trigger the task (calling .task_id usually triggers huey logic in testing)
-    task_result = success_task("test-user")
+    success_task("test-user")
 
     # Check if an attempt was logged
     attempt = HueyTaskAttempt.objects.first()

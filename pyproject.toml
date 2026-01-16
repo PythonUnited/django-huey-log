@@ -1,0 +1,20 @@
+[project]
+name = "django-huey-log"
+version = "0.1.0"
+description = "Log and monitor Huey task attempts in the Django admin"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "django>=4.2",
+    "huey>=2.5.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/django_huey_log"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = "django_huey_log"

@@ -14,3 +14,8 @@ def success_task(name):
 def failure_task():
     time.sleep(0.5)
     raise ValueError("This task was designed to fail!")
+
+
+@task(retries=3)
+def retry_configured_task():
+    return "Done"

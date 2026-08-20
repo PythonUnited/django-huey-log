@@ -23,7 +23,17 @@ class HueyTaskAttempt(models.Model):
     task_name = models.CharField(max_length=255, db_index=True, blank=True)
 
     # Attempt metadata
-    retries = models.IntegerField(null=True, blank=True)
+    retries_remaining = models.IntegerField(
+        null=True,
+        blank=True,
+        help_text=(
+            "Huey's remaining-retry budget at the time of this attempt, "
+            "i.e. task.retries as reported by huey -- NOT the number of "
+            "attempts made so far. Decrements by one on each retry, so a "
+            "task that succeeds on its first try always shows its "
+            "originally configured `retries=` value (0 if unset)."
+        ),
+    )
     eta = models.DateTimeField(null=True, blank=True)
 
     status = models.CharField(max_length=32, choices=Status.choices, db_index=True)

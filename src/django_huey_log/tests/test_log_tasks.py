@@ -1,6 +1,6 @@
 import pytest
 
-from example.tasks import failure_task, success_task
+from example.tasks import failure_task, retry_configured_task, success_task
 
 from ..models import HueyTaskAttempt
 
@@ -40,3 +40,24 @@ def test_task_logging_arguments():
 
     attempt = HueyTaskAttempt.objects.filter(task_name="success_task").first()
     assert "{'complex': [1, 2, 3]}" in attempt.kwargs_repr
+
+
+@pytest.mark.django_db
+def test_retries_remaining_defaults_to_zero_without_retries_kwarg():
+    # success_task is defined with plain @task(), i.e. huey's retries=0
+    # default. retries_remaining reflects that budget, not "attempts made".
+    success_task("test-user")
+
+    attempt = HueyTaskAttempt.objects.filter(task_name="success_task").first()
+    assert attempt.retries_remaining == 0
+
+
+@pytest.mark.django_db
+def test_retries_remaining_reflects_configured_budget_on_first_success():
+    # retry_configured_task is defined with @task(retries=3). Since it
+    # succeeds on the first attempt, no retry ever fires, so the logged
+    # retries_remaining is still the full configured budget, not zero.
+    retry_configured_task()
+
+    attempt = HueyTaskAttempt.objects.filter(task_name="retry_configured_task").first()
+    assert attempt.retries_remaining == 3

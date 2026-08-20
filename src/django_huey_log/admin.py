@@ -10,7 +10,7 @@ class HueyTaskAttemptAdmin(admin.ModelAdmin):
         "task_name",
         "task_id",
         "status",
-        "retries",
+        "retries_remaining",
         "duration_ms",
     )
     list_filter = ("status", "task_name", "created_at")

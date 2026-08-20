@@ -59,7 +59,7 @@ def _upsert_attempt(task, status: str, **fields):
             task_name=_task_name(task),
             status=status,
             started_at=timezone.now(),
-            retries=getattr(task, "retries", None),
+            retries_remaining=getattr(task, "retries", None),
             eta=_task_eta(task),
             args_repr=_safe_repr(getattr(task, "args", None)),
             kwargs_repr=_safe_repr(getattr(task, "kwargs", None)),
@@ -89,13 +89,13 @@ def _upsert_attempt(task, status: str, **fields):
     for k, v in fields.items():
         setattr(attempt, k, v)
 
-    attempt.retries = getattr(task, "retries", attempt.retries)
+    attempt.retries_remaining = getattr(task, "retries", attempt.retries_remaining)
     attempt.save(
         update_fields=[
             "status",
             "finished_at",
             "duration_ms",
-            "retries",
+            "retries_remaining",
             "exc_type",
             "exc_message",
             "traceback",

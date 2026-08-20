@@ -43,6 +43,16 @@ Once installed, navigate to the **Huey Task Attempts** section in your Django Ad
 - Search by task name or task ID.
 - Inspect the traceback for failed tasks to debug issues quickly.
 
+### Reading `retries_remaining`
+
+This is a snapshot of huey's own `task.retries` at the time of the attempt --
+the number of retries still available, not how many attempts have happened.
+It only decrements when a retry actually fires. A task defined with
+`@task(retries=8)` that succeeds on its very first try will log
+`retries_remaining: 8` for that single attempt; a task defined with no
+`retries=` kwarg (huey's default is `0`) always logs `retries_remaining: 0`,
+even though it ran successfully and was never retried.
+
 ## License
 
 MIT
